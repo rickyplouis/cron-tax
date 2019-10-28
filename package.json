@@ -1,0 +1,22 @@
+{
+  "name": "cron-tax",
+  "version": "1.0.0",
+  "description": "Cron syntax converter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/rickyplouis/cron-tax"
+  },
+  "keywords": [
+    "cronjob",
+    "cron",
+    "syntax",
+    "cron",
+    "conversion"
+  ],
+  "author": "rickyplouis",
+  "license": "ISC"
+}
