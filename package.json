@@ -1,7 +1,7 @@
 {
   "name": "cron-tax",
   "version": "1.0.0",
-  "description": "Cron syntax converter",
+  "description": "Intuitive cron syntax converter",
   "main": "index.js",
   "scripts": {
     "prepublishOnly": "nsp audit --audit-level high",

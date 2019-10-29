@@ -5,19 +5,8 @@ node_js:
   - v6
 script: echo "Running tests against $(node -v)..."
 
-cache:
-  directories:
-    - node_modules
-
-install:
-  - npm install
-
 jobs:
   include:
-    - stage: Lint
-      script: npm run lint
-    - stage: Build
-      script: npm run build
     - stage: Produce Coverage
       node_js: node
-      script: npm run build && jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+      script: jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
