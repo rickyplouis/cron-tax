@@ -1,6 +1,10 @@
 const cron = require('../lib/index.js');
 
 describe('cron().every()', () => {
+  test('Throws for invalid unit type', () => {
+    expect(() => cron().every('second')).toThrow('Invalid unit type');
+  });
+
   describe('cron().every(minute)', () => {
     test('Returns syntax for every minute', () => {
       expect(cron().every('minute')).toBe('* * * * *');
@@ -30,14 +34,41 @@ describe('cron().every()', () => {
       expect(cron().every('hour', { between: [100, 1800] })).toBe('0 1-18 * * *');
     });
   });
-});
 
-describe('cron().every(day)', () => {
-  test('Returns syntax for every day', () => {
-    expect(cron().every('day')).toBe('0 0 * * *');
+  describe('cron().every(day)', () => {
+    test('Returns syntax for every day', () => {
+      expect(cron().every('day')).toBe('0 0 * * *');
+    });
+    test('Returns syntax for every day at 6 p.m.', () => {
+      expect(cron().every('day', { at: 1800 })).toBe('0 18 * * *');
+    });
+
+    test('Returns syntax for every day at 9 a.m.', () => {
+      expect(cron().every('day', { at: 900 })).toBe('0 9 * * *');
+    });
   });
-  test('Returns syntax for every day at 6 p.m.', () => {
-    expect(cron().every('day', { at: 1800 })).toBe('0 18 * * *');
+
+  describe('cron().every(week)', () => {
+    test('Returns syntax for every week', () => {
+      expect(cron().every('week')).toBe('0 0 * * 0');
+    });
+    test('Returns syntax for every week on monday', () => {
+      expect(cron().every('week', { weekday: 1 })).toBe('0 0 * * 1');
+    });
+
+    test('Returns syntax for every week on monday at 9 a.m.', () => {
+      expect(cron().every('week', { weekday: 1, at: 900 })).toBe('0 9 * * 1');
+    });
+
+    test('Returns syntax for every week on thursday at midnight', () => {
+      expect(cron().every('week', { weekday: 4, at: 0 })).toBe('0 0 * * 4');
+    });
+
+    test('Returns error for time but no weekday', () => {
+      expect(() => cron().every('week', { at: 900 })).toThrow(
+        'Must include weekday: (0-6)'
+      );
+    });
   });
 });
 

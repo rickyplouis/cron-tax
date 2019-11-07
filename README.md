@@ -32,6 +32,19 @@ cronTax().every('hour', before: 1500); // returns "0 0-15 * * *"
 
 // create a cron job that runs every hour after 9 p.m.
 cronTax().every('hour', after: 2100); // returns "0 21-23 * * *"
+
+// create a cron job that runs every day at 6 p.m.
+cronTax().every('hour', after: 1800); // returns "0 18 * * *"
+
+// create a cron job that runs every week at Sunday at midnight
+cronTax().every('week'); // returns "0 0 * * 0"
+
+// weekdays are Sunday = 0 through Saturday = 6
+// create a cron job that runs every week at Wednesday at midnight
+cronTax().every('week', { weekday: 3 }); // returns "0 0 * * 3"
+
+// create a cron job that runs every week at Wednesday at 7 p.m.
+cronTax().every('week', { weekday: 3, at: 1900 }); // returns "0 19 * * 3"
 ```
 
 #### Supported units
@@ -39,8 +52,8 @@ cronTax().every('hour', after: 2100); // returns "0 21-23 * * *"
 * hour
 * day
 * week
-* month
-* year
+* month // coming soon
+* year // coming soon
 
 
 #### Testing cronjobs
