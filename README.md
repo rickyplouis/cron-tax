@@ -1,4 +1,4 @@
-## cron-tax [![Build Status](https://travis-ci.com/rickyplouis/cron-tax.svg?branch=master)](https://travis-ci.com/rickyplouis/cron-tax) [![Coverage Status](https://coveralls.io/repos/github/rickyplouis/cron-tax/badge.svg?branch=master)](https://coveralls.io/github/rickyplouis/cron-tax?branch=master)
+## cron-tax [![Build Status](https://travis-ci.com/rickyplouis/cron-tax.svg?branch=master)](https://travis-ci.com/rickyplouis/cron-tax) [![Coverage Status](https://coveralls.io/repos/github/rickyplouis/cron-tax/badge.svg?branch=master)](https://coveralls.io/github/rickyplouis/cron-tax?branch=master)[![npm version](https://badge.fury.io/js/cron-tax.svg)](https://badge.fury.io/js/cron-tax)
 
 ###
 
