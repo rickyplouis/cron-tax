@@ -1,8 +1,8 @@
 {
   "name": "cron-tax",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Intuitive cron syntax converter",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "prepublishOnly": "nsp audit --audit-level high",
     "pretest": "eslint .",
