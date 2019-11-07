@@ -12,12 +12,36 @@ $ npm i cron-tax
 ```js
 const cronTax = require('cron-tax');
 
+// create a cron job that runs
+cronTax().every('minute'); // returns "* * * * *"
+
+// create a cron job that runs every minute before 9 a.m.
+cronTax().every('minute', { before: 900}); // returns "* 0-9 * * *"
+
 // create a cron job that runs every minute past 9 a.m.
-cronTax().every('minute').past(900); // returns "* 9 * * *"
+cronTax().every('minute', { after: 900}); // returns "* 9-23 * * *"
+
+// create a cron job that runs every between 9 a.m. and 5 p.m.
+cronTax().every('minute', { between: [900, 1700]}); // returns "* 9-17 * * *"
+
+// create a cron job that runs every hour
+cronTax().every('hour'); // returns "0 * * * *"
+
+// create a cron job that runs every hour before 3 p.m.
+cronTax().every('hour', before: 1500); // returns "0 0-15 * * *"
+
+// create a cron job that runs every hour after 9 p.m.
+cronTax().every('hour', after: 2100); // returns "0 21-23 * * *"
 ```
 
 #### Supported units
-* m or min or minute or minutes
+* minute
+* hour
+* day
+* week
+* month
+* year
+
 
 #### Testing cronjobs
 
