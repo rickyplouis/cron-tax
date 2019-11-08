@@ -1,6 +1,6 @@
 {
   "name": "cron-tax",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Intuitive cron syntax converter",
   "main": "lib/index.js",
   "scripts": {
