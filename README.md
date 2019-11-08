@@ -33,8 +33,8 @@ cronTax().every('hour', { before: 1500 }); // returns "0 0-15 * * *"
 // create a cron job that runs every hour after 9 p.m.
 cronTax().every('hour', { after: 2100 }); // returns "0 21-23 * * *"
 
-// create a cron job that runs every day at 6 p.m.
-cronTax().every('hour', { after: 1800 }); // returns "0 18 * * *"
+// create a cron job that runs every hour between 1 a.m. and 6 p.m.
+cronTax().every('hour', { between: [100, 1800] }) // returns '0 1-18 * * *'
 
 // create a cron job that runs every week at Sunday at midnight
 cronTax().every('week'); // returns "0 0 * * 0"
@@ -53,7 +53,7 @@ cronTax().every('month'); // returns "0 0 1 * *"
 cronTax().every('month', { day: 15 }); // returns "0 0 15 * *"
 
 // create a cron job that runs every the 15th month at 6 p.m.
-cron().every('month', { day: 15, at: 1800 }) // returns '0 18 15 * *'
+cronTax().every('month', { day: 15, at: 1800 }) // returns '0 18 15 * *'
 
 // create a cron job that runs every year at midnight on jan 1st
 cronTax().every('year'); // returns "0 0 1 1 *"
@@ -63,6 +63,15 @@ const valentines = new Date(2019, 1, 12, 14, 30);
 cronTax().every('year', { date: valentines}); // returns "30 14 12 1 *"
 
 ```
+
+## API
+| Units  | every(unitType)         | optional params        |
+|--------|-------------------------|------------------------|
+| Minute | minutes, minute, min, m | before, after, between |
+| Hour   | hours, hour, hr, h      | before, after, between |
+| Week   | weeks, week, wk, w      | weekday, at            |
+| Month  | months, month, mon, mm  | day, at                |
+| Year   | years, year, yr, y      | date                   |
 
 #### Supported units
 * minute
