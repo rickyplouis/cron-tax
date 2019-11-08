@@ -1,4 +1,4 @@
-## cron-tax [![Build Status](https://travis-ci.com/rickyplouis/cron-tax.svg?branch=master)](https://travis-ci.com/rickyplouis/cron-tax) [![Coverage Status](https://coveralls.io/repos/github/rickyplouis/cron-tax/badge.svg?branch=master)](https://coveralls.io/github/rickyplouis/cron-tax?branch=master)[![npm version](https://badge.fury.io/js/cron-tax.svg)](https://badge.fury.io/js/cron-tax)
+## cron-tax [![Build Status](https://travis-ci.com/rickyplouis/cron-tax.svg?branch=master)](https://travis-ci.com/rickyplouis/cron-tax) [![Coverage Status](https://coveralls.io/repos/github/rickyplouis/cron-tax/badge.svg?branch=master)](https://coveralls.io/github/rickyplouis/cron-tax?branch=master) [![npm version](https://badge.fury.io/js/cron-tax.svg)](https://badge.fury.io/js/cron-tax)
 
 ###
 
@@ -12,7 +12,7 @@ $ npm i cron-tax
 ```js
 const cronTax = require('cron-tax');
 
-// create a cron job that runs
+// create a cron job that runs every minute
 cronTax().every('minute'); // returns "* * * * *"
 
 // create a cron job that runs every minute before 9 a.m.
@@ -28,13 +28,13 @@ cronTax().every('minute', { between: [900, 1700]}); // returns "* 9-17 * * *"
 cronTax().every('hour'); // returns "0 * * * *"
 
 // create a cron job that runs every hour before 3 p.m.
-cronTax().every('hour', before: 1500); // returns "0 0-15 * * *"
+cronTax().every('hour', { before: 1500 }); // returns "0 0-15 * * *"
 
 // create a cron job that runs every hour after 9 p.m.
-cronTax().every('hour', after: 2100); // returns "0 21-23 * * *"
+cronTax().every('hour', { after: 2100 }); // returns "0 21-23 * * *"
 
 // create a cron job that runs every day at 6 p.m.
-cronTax().every('hour', after: 1800); // returns "0 18 * * *"
+cronTax().every('hour', { after: 1800 }); // returns "0 18 * * *"
 
 // create a cron job that runs every week at Sunday at midnight
 cronTax().every('week'); // returns "0 0 * * 0"
@@ -45,6 +45,23 @@ cronTax().every('week', { weekday: 3 }); // returns "0 0 * * 3"
 
 // create a cron job that runs every week at Wednesday at 7 p.m.
 cronTax().every('week', { weekday: 3, at: 1900 }); // returns "0 19 * * 3"
+
+// create a cron job that runs every month
+cronTax().every('month'); // returns "0 0 1 * *"
+
+// create a cron job that runs every the 15th month at midnight
+cronTax().every('month', { day: 15 }); // returns "0 0 15 * *"
+
+// create a cron job that runs every the 15th month at 6 p.m.
+cron().every('month', { day: 15, at: 1800 }) // returns '0 18 15 * *'
+
+// create a cron job that runs every year at midnight on jan 1st
+cronTax().every('year'); // returns "0 0 1 1 *"
+
+// create a cron job that runs every valentines day at 2:30 p.m.
+const valentines = new Date(2019, 1, 12, 14, 30);
+cronTax().every('year', { date: valentines}); // returns "30 14 12 1 *"
+
 ```
 
 #### Supported units
@@ -52,9 +69,8 @@ cronTax().every('week', { weekday: 3, at: 1900 }); // returns "0 19 * * 3"
 * hour
 * day
 * week
-* month // coming soon
-* year // coming soon
-
+* month
+* year
 
 #### Testing cronjobs
 

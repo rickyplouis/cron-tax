@@ -70,6 +70,40 @@ describe('cron().every()', () => {
       );
     });
   });
+
+  describe('cron().every(month)', () => {
+    test('Returns syntax for every month', () => {
+      expect(cron().every('month')).toBe('0 0 1 * *');
+    });
+    test('Returns syntax for every 15th of the month', () => {
+      expect(cron().every('month', { day: 15 })).toBe('0 0 15 * *');
+    });
+    test('Returns syntax for every 15th of the month at 6 p.m.', () => {
+      expect(cron().every('month', { day: 15, at: 1800 })).toBe('0 18 15 * *');
+    });
+    test('Returns error for time but no day', () => {
+      expect(() => cron().every('month', { at: 1800 })).toThrow(
+        'Must include day: (0-31)'
+      );
+    });
+  });
+});
+// New Date(year, month, day, hours, minutes, seconds, milliseconds)
+
+describe('cron().every(year)', () => {
+  test('Returns syntax for every year', () => {
+    // Returns cronjob that runs at midnight on jan 1st
+    expect(cron().every('year')).toBe('0 0 1 1 *');
+  });
+  const valentines = new Date(2019, 1, 12, 14, 30);
+  test('returns syntax for specific date every year', () => {
+    expect(cron().every('year', { date: valentines })).toBe('30 14 12 1 *');
+  });
+  test('throws error for bad date', () => {
+    expect(() => cron().every('year', { date: 'valentines day' })).toThrow(
+      'Must use javascript date object: new Date()'
+    );
+  });
 });
 
 describe('cron().unitList()', () => {
@@ -113,6 +147,42 @@ describe('cron().isDay()', () => {
   });
   test('returns false for 1day', () => {
     expect(cron().isDay('1day')).toBe(false);
+  });
+});
+
+describe('cron().isWeek()', () => {
+  test('returns true for week', () => {
+    expect(cron().isWeek('weeks')).toBe(true);
+    expect(cron().isWeek('week')).toBe(true);
+    expect(cron().isWeek('wk')).toBe(true);
+    expect(cron().isWeek('w')).toBe(true);
+  });
+  test('returns false for 1week', () => {
+    expect(cron().isWeek('1week')).toBe(false);
+  });
+});
+
+describe('cron().isMonth()', () => {
+  test('returns true for month', () => {
+    expect(cron().isMonth('months')).toBe(true);
+    expect(cron().isMonth('month')).toBe(true);
+    expect(cron().isMonth('mon')).toBe(true);
+    expect(cron().isMonth('mm')).toBe(true);
+  });
+  test('returns false for 1month', () => {
+    expect(cron().isMonth('1month')).toBe(false);
+  });
+});
+
+describe('cron().isYear()', () => {
+  test('returns true for year', () => {
+    expect(cron().isYear('years')).toBe(true);
+    expect(cron().isYear('year')).toBe(true);
+    expect(cron().isYear('yr')).toBe(true);
+    expect(cron().isYear('y')).toBe(true);
+  });
+  test('returns false for 1yr', () => {
+    expect(cron().isMonth('1yr')).toBe(false);
   });
 });
 
